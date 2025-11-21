@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css'; // Fondamentale per vedere la mappa!
+import './App.css';
+
+// Icona standard di Leaflet (fix per un bug noto di React-Leaflet)
+import L from 'leaflet';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+});
+L.Marker.prototype.options.icon = DefaultIcon;
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Coordinate di Napoli (o dove preferisci)
+  const center = [40.8518, 14.2681];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ height: '100vh', width: '100%' }}>
+      <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%' }}>
+        {/* Questo è il "disegno" della mappa (OpenStreetMap) */}
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        
+        {/* Un marker di prova */}
+        <Marker position={center}>
+          <Popup>
+            Miao! 🐱 <br /> Sono un gatto di Napoli.
+          </Popup>
+        </Marker>
+      </MapContainer>
+    </div>
+  );
 }
 
-export default App
+export default App;
