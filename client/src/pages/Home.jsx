@@ -25,24 +25,22 @@ function Home() {
         <h1>STREETCATS</h1>
         <p>Hai avvistato un gatto randagio? Condividilo con tutta la community!</p>
         
-        {/* --- NUOVO BLOCCO BOTTONE CON GATTINO --- */}
         <div className="cat-button-wrapper">
             
-            {/* L'immagine del gatto (Disegno SVG fatto a codice) */}
+            {/* GATTO SVG CON I NUOVI COLORI DELLA PALETTE */}
             <svg className="cat-mascot" viewBox="0 0 100 100" width="60">
-                {/* Orecchie */}
-                <path d="M20 70 L10 40 L40 50 Z" fill="#333" />
-                <path d="M80 70 L90 40 L60 50 Z" fill="#333" />
-                {/* Testa */}
-                <circle cx="50" cy="70" r="35" fill="#333" />
-                {/* Occhi */}
+                {/* Colore Viola #3D2652 per il corpo */}
+                <path d="M20 70 L10 40 L40 50 Z" fill="#3D2652" />
+                <path d="M80 70 L90 40 L60 50 Z" fill="#3D2652" />
+                <circle cx="50" cy="70" r="35" fill="#3D2652" />
+                
                 <circle cx="35" cy="65" r="5" fill="white" />
                 <circle cx="65" cy="65" r="5" fill="white" />
-                <circle cx="35" cy="65" r="2" fill="black" />
-                <circle cx="65" cy="65" r="2" fill="black" />
-                {/* Naso */}
+                {/* Pupille verdi #99D562 */}
+                <circle cx="35" cy="65" r="2" fill="#99D562" />
+                <circle cx="65" cy="65" r="2" fill="#99D562" />
+                
                 <path d="M45 75 L55 75 L50 80 Z" fill="pink" />
-                {/* Zampette che spuntano */}
                 <ellipse cx="30" cy="95" rx="10" ry="5" fill="white" />
                 <ellipse cx="70" cy="95" rx="10" ry="5" fill="white" />
             </svg>
@@ -51,7 +49,6 @@ function Home() {
                 Aggiungi un gatto +
             </button>
         </div>
-        {/* ---------------------------------------- */}
 
       </div>
 

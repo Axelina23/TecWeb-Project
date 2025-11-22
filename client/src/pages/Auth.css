@@ -3,38 +3,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh; /* Lasciamo spazio alla navbar */
-    background-color: #f0f2f5;
+    height: 90vh;
+    background-color: #f0f2f5; /* O il tuo verdino chiaro */
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Il contenitore principale arrotondato */
+/* --- CONTENITORE PRINCIPALE --- */
 .container {
-    background-color: #4b2121;
-    border-radius: 20px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-                0 10px 10px rgba(0,0,0,0.22);
+    background-color: #fff;
+    border-radius: 30px; /* Curve molto arrotondate per il box principale */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2); /* Ombra morbida e profonda */
     position: relative;
     overflow: hidden;
-    width: 768px;
+    width: 850px; /* Un po' più largo per far respirare il design */
     max-width: 100%;
-    min-height: 480px;
+    min-height: 550px; /* Più alto */
 }
 
-/* Stile dei Form (Nero come nel disegno) */
+/* --- I FORM (Sinistra e Destra) --- */
 .form-container {
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
-    background-color: #1a1a1a; /* Sfondo scuro */
-    color: white;
+    background-color: #ffffff; /* Sfondo BIANCO per i form, come nel tuo esempio */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 0 50px;
     text-align: center;
+    z-index: 1;
 }
 
 .form-container form {
@@ -44,51 +43,73 @@
     align-items: center;
 }
 
-/* Input scuri */
-.form-container input {
-    background-color: #333;
-    border: none;
-    padding: 12px 15px;
-    margin: 8px 0;
-    width: 100%;
-    border-radius: 8px;
-    color: white;
-    outline: none;
+/* Titoli */
+.form-container h1 {
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #333; /* Titolo scuro su sfondo bianco */
 }
 
-.form-container h1 {
+.form-container span {
+    font-size: 13px;
+    color: #888;
     margin-bottom: 20px;
 }
 
+/* --- INPUT FIELDS (Stile "Pillola" grigio chiaro) --- */
+.form-container input {
+    background-color: #eee; /* Grigio chiarissimo */
+    border: none;
+    padding: 15px 20px; /* Più spazioso */
+    margin: 8px 0;
+    width: 100%;
+    border-radius: 15px; /* Molto arrotondati */
+    color: #333;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-container input::placeholder {
+    color: #aaa;
+}
+
+/* Link Password dimenticata */
+.form-container a {
+    color: #333;
+    font-size: 13px;
+    margin: 15px 0;
+    text-decoration: none;
+    border-bottom: 1px dashed #333;
+}
+
+/* --- BOTTONI FORM (Viola Pieno) --- */
 .form-container button {
-    border-radius: 20px;
-    border: 1px solid #6b46c1;
-    background-color: #6b46c1; /* Viola */
-    color: #FFFFFF;
+    border-radius: 30px;
+    border: none;
+    background-color: #3D2652; /* Il tuo Viola Scuro */
+    color: #ffffff;
     font-size: 12px;
     font-weight: bold;
-    padding: 12px 45px;
+    padding: 15px 50px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    margin-top: 20px;
+    transition: transform 80ms ease-in, box-shadow 0.3s;
+    margin-top: 10px;
     cursor: pointer;
+    box-shadow: 0 5px 15px rgba(61, 38, 82, 0.3);
 }
 
 .form-container button:active {
     transform: scale(0.95);
 }
 
-/* --- POSIZIONAMENTO E ANIMAZIONI --- */
-
-/* Sign In (Login) Container - Sta a sinistra */
+/* --- ANIMAZIONI DI SCORRIMENTO --- */
 .sign-in-container {
     left: 0;
     width: 50%;
     z-index: 2;
 }
 
-/* Sign Up (Register) Container - Sta a destra (nascosto all'inizio) */
 .sign-up-container {
     left: 0;
     width: 50%;
@@ -96,7 +117,7 @@
     z-index: 1;
 }
 
-/* Quando attiviamo il pannello destro... */
+/* Quando il pannello si muove */
 .container.right-panel-active .sign-in-container {
     transform: translateX(100%);
 }
@@ -113,7 +134,10 @@
     50%, 100% { opacity: 1; z-index: 5; }
 }
 
-/* --- IL PANNELLO VIOLA (OVERLAY) --- */
+/* =========================================
+   IL PANNELLO "BLOB" (LA PARTE DIFFICILE)
+   ========================================= */
+
 .overlay-container {
     position: absolute;
     top: 0;
@@ -130,8 +154,9 @@
 }
 
 .overlay {
-    background: #6b46c1; /* Il viola del tuo mockup */
-    background: linear-gradient(to right, #553c9a, #6b46c1);
+    /* Sfondo Viola/Blu come nel tuo esempio */
+    background: #3D2652;
+    background: linear-gradient(to right, #3D2652, #563870);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -144,6 +169,14 @@
     transition: transform 0.6s ease-in-out;
 }
 
+/*
+   QUI STA IL TRUCCO PER LA CURVA!
+   Invece di un rettangolo dritto, usiamo clip-path o border-radius estremi
+   per simulare la "bolla" che vedi nelle tue foto.
+   Ma per farlo muovere come nell'esempio (dove la curva si inverte),
+   il metodo più stabile con questo setup è usare border-radius dinamici.
+*/
+
 .container.right-panel-active .overlay {
     transform: translateX(50%);
 }
@@ -154,7 +187,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 40px;
+    padding: 0 30px;
     text-align: center;
     top: 0;
     height: 100%;
@@ -163,14 +196,16 @@
     transition: transform 0.6s ease-in-out;
 }
 
+/* PANNELLO SINISTRO (Welcome Back) */
 .overlay-left {
-    transform: translateX(-20%);
+    transform: translateX(-200%);
 }
 
 .container.right-panel-active .overlay-left {
     transform: translateX(0);
 }
 
+/* PANNELLO DESTRO (Hello Friend) */
 .overlay-right {
     right: 0;
     transform: translateX(0);
@@ -180,8 +215,34 @@
     transform: translateX(20%);
 }
 
-/* Bottoni trasparenti sull'overlay */
-.ghost {
+/* BOTTONE GHOST (Quello trasparente sul pannello colorato) */
+button.ghost {
     background-color: transparent !important;
-    border-color: #FFFFFF !important;
+    border: 2px solid #FFFFFF !important; /* Bordo Bianco */
+    color: #FFFFFF !important; /* Testo Bianco */
+    box-shadow: none;
+    margin-top: 20px;
+}
+
+button.ghost:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+}
+
+/* AGGIUNTA FONDAMENTALE: LA CURVA (The Blob Shape) 
+   Modifichiamo l'aspetto dell'overlay container per dargli quella forma
+*/
+
+/* Stato iniziale (Login visibile a sinistra, Overlay a destra) */
+.overlay-container {
+    /* Taglia l'angolo in basso a sinistra e in alto a sinistra per fare la curva */
+    border-top-left-radius: 150px;
+    border-bottom-left-radius: 100px;
+}
+
+/* Quando passa dall'altra parte */
+.container.right-panel-active .overlay-container {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 150px; /* La curva si sposta a destra */
+    border-bottom-right-radius: 100px;
 }

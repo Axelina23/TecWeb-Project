@@ -1,0 +1,81 @@
+/* La barra intera */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #3D2652; /* Viola Scuro */
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 70px;
+}
+
+/* Contenitore Logo + Scritta */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+/* L'immagine del gatto */
+.navbar-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    
+    /* SE IL GATTO È NERO E LO SFONDO È VIOLA SCURO, SCOMMETTA QUESTA RIGA: */
+    filter: invert(1) brightness(100); /* Lo rende bianco! */
+}
+
+.navbar-brand:hover .navbar-logo {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+/* La scritta StreetCats */
+.navbar-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: #99D562; /* Verde Lime */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Link a destra */
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #E1D5EC;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #99D562;
+}
+
+.nav-button {
+    background-color: #99D562;
+    color: #3D2652;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #41D48D;
+    transform: translateY(-2px);
+}
