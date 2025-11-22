@@ -1,0 +1,61 @@
+/* --- Wrapper per gestire bottone e gatto insieme --- */
+.cat-button-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-top: 40px; /* Spazio extra sopra per farci stare il gatto */
+}
+
+/* --- Il Bottone --- */
+.add-cat-btn {
+    position: relative;
+    background-color: #333;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    z-index: 10; /* Il bottone sta SOPRA al corpo del gatto che esce */
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* --- Il Gatto (SVG) --- */
+.cat-mascot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Centrato orizzontalmente */
+    
+    /* STATO INIZIALE: Nascosto DIETRO al bottone */
+    bottom: 0px; 
+    z-index: 1; /* Dietro al bottone */
+    
+    /* Transizione fluida per quando sale */
+    transition: bottom 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.2s, transform 0.1s;
+    opacity: 0; /* Invisibile all'inizio */
+    pointer-events: none; /* Così non puoi cliccare il gatto per sbaglio */
+}
+
+/* --- ANIMAZIONE 1: HOVER (Il gatto si poggia sopra) --- */
+.cat-button-wrapper:hover .cat-mascot {
+    bottom: 35px; /* Sale sopra il bottone */
+    opacity: 1;   /* Diventa visibile */
+}
+
+.cat-button-wrapper:hover .add-cat-btn {
+    background-color: #444;
+}
+
+/* --- ANIMAZIONE 2: CLICK (Il gatto cade) --- */
+/* :active significa "mentre stai cliccando" */
+.cat-button-wrapper:active .cat-mascot {
+    bottom: -100px; /* Cade giù attraverso il bottone! */
+    opacity: 0;     /* Svanisce mentre cade */
+    transition: bottom 0.2s ease-in, opacity 0.2s; /* Cade veloce */
+}
+
+/* Effetto click sul bottone stesso */
+.cat-button-wrapper:active .add-cat-btn {
+    transform: scale(0.95); /* Si schiaccia un po' */
+}

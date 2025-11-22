@@ -3,6 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import './Home.css';
 
 // Fix icone Leaflet
 let DefaultIcon = L.icon({
@@ -16,46 +17,46 @@ L.Marker.prototype.options.icon = DefaultIcon;
 function Home() {
   const position = [40.8518, 14.2681];
 
-  // Stili "al volo" per fare presto (poi possiamo spostarli nel CSS)
-  const styles = {
-    container: { padding: "20px", maxWidth: "1200px", margin: "0 auto" },
-    heroSection: { textAlign: "center", marginBottom: "30px" },
-    mapWrapper: { 
-      height: "400px", 
-      borderRadius: "15px", 
-      overflow: "hidden", 
-      border: "2px solid #333",
-      marginBottom: "40px",
-      position: "relative" // Importante per lo z-index
-    },
-    gridSection: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "20px" },
-    card: { 
-      border: "1px solid #ddd", 
-      borderRadius: "10px", 
-      padding: "15px", 
-      textAlign: "center",
-      boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
-    }
-  };
-
   return (
-    <div style={styles.container}>
+    <div className="home-container">
       
-      {/* HERO SECTION (Come nel disegno in alto a sinistra) */}
-      <div style={styles.heroSection}>
+      {/* HERO SECTION */}
+      <div className="hero-section">
         <h1>STREETCATS</h1>
         <p>Hai avvistato un gatto randagio? Condividilo con tutta la community!</p>
-        <button style={{
-            backgroundColor: "#333", color: "white", padding: "10px 20px", 
-            border: "none", borderRadius: "5px", cursor: "pointer", marginTop: "10px"
-        }}>
-            Aggiungi un gatto +
-        </button>
+        
+        {/* --- NUOVO BLOCCO BOTTONE CON GATTINO --- */}
+        <div className="cat-button-wrapper">
+            
+            {/* L'immagine del gatto (Disegno SVG fatto a codice) */}
+            <svg className="cat-mascot" viewBox="0 0 100 100" width="60">
+                {/* Orecchie */}
+                <path d="M20 70 L10 40 L40 50 Z" fill="#333" />
+                <path d="M80 70 L90 40 L60 50 Z" fill="#333" />
+                {/* Testa */}
+                <circle cx="50" cy="70" r="35" fill="#333" />
+                {/* Occhi */}
+                <circle cx="35" cy="65" r="5" fill="white" />
+                <circle cx="65" cy="65" r="5" fill="white" />
+                <circle cx="35" cy="65" r="2" fill="black" />
+                <circle cx="65" cy="65" r="2" fill="black" />
+                {/* Naso */}
+                <path d="M45 75 L55 75 L50 80 Z" fill="pink" />
+                {/* Zampette che spuntano */}
+                <ellipse cx="30" cy="95" rx="10" ry="5" fill="white" />
+                <ellipse cx="70" cy="95" rx="10" ry="5" fill="white" />
+            </svg>
+
+            <button className="add-cat-btn">
+                Aggiungi un gatto +
+            </button>
+        </div>
+        {/* ---------------------------------------- */}
+
       </div>
 
-      {/* MAPPA (Contenuta nel box, non full screen) */}
-      <h2 style={{textAlign: "center"}}>MAPPA DEGLI AVVISTAMENTI</h2>
-      <div style={styles.mapWrapper}>
+      <h2 className="section-title">MAPPA DEGLI AVVISTAMENTI</h2>
+      <div className="map-wrapper">
         <MapContainer center={position} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
             attribution='&copy; OpenStreetMap contributors'
@@ -67,25 +68,19 @@ function Home() {
         </MapContainer>
       </div>
 
-      {/* GRID DI GATTI (Features) */}
-      <h2>ULTIMI AVVISTAMENTI</h2>
-      <div style={styles.gridSection}>
-        {/* Creiamo 3 card finte come nel disegno */}
+      <h2 className="section-title">ULTIMI AVVISTAMENTI</h2>
+      <div className="grid-section">
         {[1, 2, 3].map((id) => (
-            <div key={id} style={styles.card}>
-                <div style={{height: "150px", background: "#eee", borderRadius: "5px", marginBottom: "10px"}}>
-                    {/* Qui andrà l'immagine */}
-                    <span style={{fontSize: "40px", lineHeight: "150px"}}>🐱</span>
+            <div key={id} className="cat-card">
+                <div className="card-image">
+                    <span className="cat-emoji">🐱</span>
                 </div>
                 <h3>Nome del Gatto</h3>
                 <p>Avvistato a Napoli</p>
-                <button style={{background: "transparent", border: "1px solid #333", padding: "5px 10px", borderRadius: "5px"}}>
-                    Learn More &gt;
-                </button>
+                <button className="learn-more-btn">Learn More &gt;</button>
             </div>
         ))}
       </div>
-
     </div>
   );
 }

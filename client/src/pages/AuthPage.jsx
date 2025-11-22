@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../Auth.css';
+import './Auth.css';
 
 function AuthPage() {
     // Se true, mostra il pannello di destra (Registrazione)
