@@ -16,7 +16,7 @@ const SchemaGatto = new mongoose.Schema({
     },
 
     // URL dell'immagine
-    ImageUrl: {
+    imageUrl: {
         type: String,
         required: true // URL dell'immagine obbligatorio
     },
