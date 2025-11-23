@@ -12,24 +12,24 @@ function AuthPage() {
                 {/* --- FORM REGISTRAZIONE (Sign Up) --- */}
                 <div className="form-container sign-up-container">
                     <form>
-                        <h1>Create Account</h1>
+                        <h1>Crea Account</h1>
                         <span>usa la tua email per registrarti</span>
-                        <input type="text" placeholder="Name" />
+                        <input type="text" placeholder="Nome" />
                         <input type="email" placeholder="Email" />
                         <input type="password" placeholder="Password" />
-                        <button>Sign Up</button>
+                        <button>Registrati</button>
                     </form>
                 </div>
 
                 {/* --- FORM LOGIN (Sign In) --- */}
                 <div className="form-container sign-in-container">
                     <form>
-                        <h1>Sign in</h1>
+                        <h1>Accedi</h1>
                         <span>usa il tuo account esistente</span>
                         <input type="email" placeholder="Email" />
                         <input type="password" placeholder="Password" />
-                        <a href="#" style={{color: 'white', fontSize: '12px', margin: '10px 0'}}>Password dimenticata?</a>
-                        <button>Sign In</button>
+                        <a href="#" style={{color: 'black', fontSize: '12px', margin: '10px 0'}}>Password dimenticata?</a>
+                        <button>Accedi</button>
                     </form>
                 </div>
 
@@ -42,7 +42,7 @@ function AuthPage() {
                             <h1>Bentornato!</h1>
                             <p>Per rimanere connesso con noi effettua il login con i tuoi dati</p>
                             <button className="ghost" onClick={() => setIsRightPanelActive(false)}>
-                                Sign In
+                                Accedi
                             </button>
                         </div>
 
@@ -51,7 +51,7 @@ function AuthPage() {
                             <h1>Benvenuto!</h1>
                             <p>Inserisci i tuoi dettagli personali e inizia il viaggio con noi</p>
                             <button className="ghost" onClick={() => setIsRightPanelActive(true)}>
-                                Sign Up
+                                Registrati
                             </button>
                         </div>
 

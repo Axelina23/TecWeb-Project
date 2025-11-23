@@ -1,39 +1,23 @@
-const { text } = require('express');
 const mongoose = require('mongoose');
 
-const SchemaGatto = new mongoose.Schema({
+const catSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    description: { type: String, required: false },
+    imageUrl: { type: String, required: true },
     
-    // Titolo del gatto
-    title: {
-        type: String,
-        required: true // Titolo obbligatorio
-    },
-
-    // Descrizione del gatto
-    description: {
-        type: String,
-        required: false // Descrizione opzionale
-    },
-
-    // URL dell'immagine
-    imageUrl: {
-        type: String,
-        required: true // URL dell'immagine obbligatorio
-    },
-
-    // Posizione geografica
+    // Posizione sulla mappa (coordinate)
     position: {
-        lat: { type : Number, required: true },
-        lng: { type : Number, required: true }
+        lat: { type: Number, required: true },
+        lng: { type: Number, required: true }
     },
 
-    // Data di creazione del documento
-    createdAt: {
-        type: Date,
-        default: Date.now // Data di creazione predefinita alla data corrente
-    },
+    // --- NUOVI CAMPI ---
+    address: { type: String, required: false }, // Indirizzo scritto (es. "Via Roma 10")
+    hasCollar: { type: Boolean, default: false }, // Ha il collare?
+    isInjured: { type: Boolean, default: false }, // È ferito?
+    // -------------------
 
-    //commenti
+    createdAt: { type: Date, default: Date.now },
     comments: [{
         text: String,
         author: String,
@@ -41,5 +25,4 @@ const SchemaGatto = new mongoose.Schema({
     }]
 });
 
-//creazione del modello Cat basato sullo schema catSchema
-module.exports = mongoose.model('Gatto', SchemaGatto);
+module.exports = mongoose.model('Cat', catSchema);

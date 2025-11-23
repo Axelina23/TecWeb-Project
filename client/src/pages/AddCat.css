@@ -1,0 +1,54 @@
+/* ... (Tutto il CSS precedente resta uguale) ... */
+
+/* --- STILE PER I TOGGLE (Collare / Ferito) --- */
+.toggles-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.toggle-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.toggle-btn {
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #eee;
+    background-color: #fff;
+    color: #888;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.toggle-btn:hover {
+    border-color: #99D562;
+}
+
+/* Quando è attivo (SÌ) */
+.toggle-btn.active {
+    background-color: #99D562; /* Verde Lime */
+    color: #3D2652; /* Viola */
+    border-color: #99D562;
+    box-shadow: 0 4px 10px rgba(153, 213, 98, 0.3);
+}
+
+/* Variante per "Ferito" (Rosso quando attivo sarebbe meglio per semantica, ma usiamo la palette) */
+/* Se vuoi usare il rosso per ferito, scommenta qui sotto. Altrimenti usa verde palette */
+/*
+.toggle-btn.active.danger {
+    background-color: #ff6b6b;
+    border-color: #ff6b6b;
+    color: white;
+}
+*/
