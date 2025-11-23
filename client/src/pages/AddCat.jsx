@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {XH} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -27,6 +28,10 @@ function AddCat() {
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState('');
     
+    // --- NUOVI STATI PER I TOGGLE ---
+    const [hasCollar, setHasCollar] = useState(false);
+    const [isInjured, setIsInjured] = useState(false);
+
     // Coordinate iniziali (Napoli)
     const [position, setPosition] = useState({ lat: 40.8518, lng: 14.2681 });
 
@@ -43,7 +48,6 @@ function AddCat() {
             <Marker position={position}></Marker>
         );
     }
-    // --------------------------------------------------
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -66,9 +70,12 @@ function AddCat() {
         formData.append('title', title);
         formData.append('description', description);
         formData.append('image', file);
-        // Inviamo le coordinate SCELTE dall'utente
         formData.append('lat', position.lat);
         formData.append('lng', position.lng);
+        
+        // --- AGGIUNGIAMO I NUOVI CAMPI AL FORMDATA ---
+        formData.append('hasCollar', hasCollar);
+        formData.append('isInjured', isInjured);
 
         try {
             const response = await fetch('http://localhost:3000/api/cats', {
@@ -77,7 +84,7 @@ function AddCat() {
             });
 
             if (response.ok) {
-                alert("Gatto caricato con successo! 🐱🎉");
+                alert("Gatto caricato con successo! 😺🎉");
                 navigate('/');
             } else {
                 console.error("Errore durante l'upload");
@@ -93,7 +100,7 @@ function AddCat() {
         <div className="add-cat-page">
             <div className="add-cat-box">
                 
-                <h1 className="add-cat-title">Nuovo Avvistamento 📸</h1>
+                <h1 className="add-cat-title">Nuovo Avvistamento 🐱</h1>
                 
                 <div className="add-cat-content">
                     
@@ -102,7 +109,7 @@ function AddCat() {
                         <form onSubmit={handleSubmit} id="cat-form" className="add-cat-form">
                             
                             <div className="form-group">
-                                <label className="form-label">Nome del gatto</label>
+                                <label className="form-label">Nome del gatto (o soprannome)</label>
                                 <input 
                                     type="text" 
                                     placeholder="Es: Il Rosso del Bar" 
@@ -124,10 +131,36 @@ function AddCat() {
                                 />
                             </div>
 
+                            {/* --- NUOVI BOTTONI TOGGLE --- */}
+                            <div className="form-group">
+                                <label className="form-label">Dettagli Importanti</label>
+                                <div className="toggles-container">
+                                    
+                                    {/* Bottone Collare */}
+                                    <button 
+                                        type="button" // Importante: type="button" per non inviare il form
+                                        className={`toggle-btn ${hasCollar ? 'active' : ''}`}
+                                        onClick={() => setHasCollar(!hasCollar)}
+                                    >
+                                        <span>🧣</span> Ha il collare? {hasCollar ? 'SÌ' : 'NO'}
+                                    </button>
+
+                                    {/* Bottone Ferito */}
+                                    <button 
+                                        type="button" 
+                                        className={`toggle-btn ${isInjured ? 'active danger' : ''}`}
+                                        onClick={() => setIsInjured(!isInjured)}
+                                    >
+                                        <span>🩹</span> Sembra ferito? {isInjured ? 'SÌ' : 'NO'}
+                                    </button>
+                                </div>
+                            </div>
+                            {/* --------------------------- */}
+
                             <div className="form-group">
                                 <label className="form-label">Carica Foto</label>
                                 <label className="file-upload-label">
-                                    <span className="upload-icon">📤</span>
+                                    <span className="upload-icon">📸</span>
                                     {file ? <strong>{file.name}</strong> : "Scegli foto"}
                                     <input type="file" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} required />
                                 </label>
@@ -143,31 +176,29 @@ function AddCat() {
 
                     {/* COLONNA DESTRA: MAPPA */}
                     <div className="add-cat-map-column">
-                        <div className="column-title">Dove l'hai visto? (Clicca sulla mappa)</div>
+                        <div className="column-title">Posizione (Clicca sulla mappa)</div>
                         <div className="map-picker-wrapper">
                             <MapContainer center={position} zoom={13} style={{ height: '100%', width: '100%' }}>
                                 <TileLayer
                                     attribution='&copy; OpenStreetMap contributors'
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
-                                {/* Questo componente gestisce il click */}
                                 <LocationMarker />
                             </MapContainer>
                         </div>
                         
-                        <div style={{marginTop: '10px', fontSize: '12px', color: '#666'}}>
+                        <div className="coords-display">
                             Lat: {position.lat.toFixed(4)}, Lng: {position.lng.toFixed(4)}
                         </div>
                     </div>
 
                 </div>
 
-                {/* BOTTONI (Fuori dalle colonne, in basso) */}
-                <div className="form-actions" style={{width: '100%', marginTop: '30px'}}>
+                {/* BOTTONI AZIONI */}
+                <div className="form-actions">
                     <button type="button" onClick={() => navigate('/')} className="btn btn-cancel">
                         Annulla
                     </button>
-                    {/* Il bottone submit è collegato al form tramite l'ID */}
                     <button type="submit" form="cat-form" className="btn btn-submit">
                         Pubblica Avvistamento
                     </button>
