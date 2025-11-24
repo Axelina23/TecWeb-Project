@@ -57,5 +57,15 @@ const express = require('express');
             res.json({ message: err });
         }
     });
+    // GET: Prendi un singolo gatto per ID
+router.get('/:id', async (req, res) => {
+    try {
+        const cat = await Cat.findById(req.params.id);
+        if (!cat) return res.status(404).json({ message: "Gatto non trovato" });
+        res.json(cat);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
     module.exports = router;

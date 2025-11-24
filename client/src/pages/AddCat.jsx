@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import {XH} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -142,7 +141,7 @@ function AddCat() {
                                         className={`toggle-btn ${hasCollar ? 'active' : ''}`}
                                         onClick={() => setHasCollar(!hasCollar)}
                                     >
-                                        <span>🧣</span> Ha il collare? {hasCollar ? 'SÌ' : 'NO'}
+                                         Ha il collare? {hasCollar ? 'SÌ' : 'NO'}
                                     </button>
 
                                     {/* Bottone Ferito */}
@@ -151,7 +150,7 @@ function AddCat() {
                                         className={`toggle-btn ${isInjured ? 'active danger' : ''}`}
                                         onClick={() => setIsInjured(!isInjured)}
                                     >
-                                        <span>🩹</span> Sembra ferito? {isInjured ? 'SÌ' : 'NO'}
+                                       Sembra ferito? {isInjured ? 'SÌ' : 'NO'}
                                     </button>
                                 </div>
                             </div>

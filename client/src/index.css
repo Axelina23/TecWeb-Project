@@ -1,6 +1,23 @@
-body, html, #root {
+/* Impostazioni di base */
+body, html {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
+  
+  /* 1. L'immagine va qui (sul fondo) */
+  background-image: url('./assets/Background.png'); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+#root {
+  min-height: 100%;
+  width: 100%;
+  
+  /* 2. Il colore opacizzante va qui (sopra l'immagine) */
+  /* Regola lo 0.85 per fare più o meno trasparenza (0.5 = più trasparente) */
+  background-color: rgba(255, 255, 255, 0.70);
 }

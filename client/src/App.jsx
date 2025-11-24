@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import AuthPage from "./pages/AuthPage";
 import Navbar from "./components/Navbar";
 import AddCat from "./pages/AddCat"; // <--- IMPORTA LA NUOVA PAGINA
-
+import CatDetails from "./pages/CatDetails";
 import './index.css'; 
 
 function App() {
@@ -15,10 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/register" element={<AuthPage />} />
-        
-        {/* NUOVA ROTTA PER AGGIUNGERE GATTI */}
         <Route path="/add-cat" element={<AddCat />} />
-        
+        <Route path="/cats/:id" element={<CatDetails />} />
       </Routes>
     </BrowserRouter>
   );
